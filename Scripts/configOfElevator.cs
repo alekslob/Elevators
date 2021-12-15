@@ -9,12 +9,12 @@ public class configOfElevator : MonoBehaviour
     public InputField speedInput;
     public InputField timeInput;
 
-    public int SPEED_ELEVATOR;
+    static public float SPEED_ELEVATOR;
     public int TIME_STAY;
     // Start is called before the first frame update
     void Start()
     {
-        SPEED_ELEVATOR = 2;
+        SPEED_ELEVATOR = 0.01f;
         TIME_STAY = 3;
         speedInput.GetComponent<InputField>().text = SPEED_ELEVATOR.ToString();
         timeInput.GetComponent<InputField>().text = TIME_STAY.ToString();
@@ -27,7 +27,7 @@ public class configOfElevator : MonoBehaviour
     }
 
     public void OnClick() {
-        SPEED_ELEVATOR = Convert.ToInt32(speedInput.GetComponent<InputField>().text);
+        SPEED_ELEVATOR = (float) Convert.ToDouble(speedInput.GetComponent<InputField>().text);
         TIME_STAY = Convert.ToInt32(timeInput.GetComponent<InputField>().text);
     }
 }

@@ -54,12 +54,14 @@ public class StateOfHouse : MonoBehaviour
                 Vector3 elevatorPosition = floor.transform.position;
                 elevatorPosition.x += WIDTH_FLOOR * (i - avgX);
                 elevatorPosition.y = START_POSITION_Y;
+                
                 StateOfHouse.elevators.Add(Instantiate(elevator, elevatorPosition, Quaternion.identity));
 
                 for(int j = 0; j < StateOfHouse.countOfFloor; j++) {
                     Vector3 floorPosition = floor.transform.position;
                     floorPosition.x += WIDTH_FLOOR * (i - avgX);
                     floorPosition.y += START_POSITION_Y + HEIGHT_FLOOR * j;
+                    
                     this.floors[i].Add(Instantiate(floor, floorPosition, Quaternion.identity));
 
                     Vector3 floorButtonPosition = button.transform.position;
