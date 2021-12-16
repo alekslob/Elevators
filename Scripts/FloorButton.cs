@@ -9,42 +9,58 @@ public class FloorButton : MonoBehaviour
     public int floorNumber;
     public int entranceNumber;
 
-    float endFloor;
-    float speed;
+    
+    static public float endFloor =-1;
+    // float speed;
     void Start(){
-        speed = 0;
-        endFloor = StateOfHouse.START_POSITION_Y;
+        // endFloor = StateOfHouse.START_POSITION_Y;
     }
     void OnMouseDown() {
-            if(speed == 0){
-                this.endFloor = StateOfHouse.START_POSITION_Y + StateOfHouse.HEIGHT_FLOOR * floorNumber;
-                Vector3 newPosition = StateOfHouse.elevators[entranceNumber].transform.position;
-                float startFloor = newPosition.y;
-                if(startFloor < endFloor) speed = configOfElevator.SPEED_ELEVATOR;
-                else{
-                    if(startFloor > endFloor) speed = -configOfElevator.SPEED_ELEVATOR;
-                }
+            //добавление список вызываемых этажей
+            configOfElevator.elevatorsTasks[entranceNumber].listFloors.Add(floorNumber);
+            ElevatorsTask task = configOfElevator.elevatorsTasks[entranceNumber];
+            if(task.endFloor != -1){   //Если еще не выбран приоритетный этаж и нет этажей в задаче
+                //прилритетный этаж
+                configOfElevator.elevatorsTasks[entranceNumber].endFloor = floorNumber;
+                configOfElevator.elevatorsTasks[entranceNumber].task = 1;
             }
+            //смена цвета
+            //
+
+
+            // if(speed == 0){
+            //     this.
+            //     Vector3 newPosition = StateOfHouse.elevators[entranceNumber].transform.position;
+            //     float startFloor = newPosition.y;
+            //     if(startFloor < endFloor) speed = configOfElevator.SPEED_ELEVATOR;
+            //     else{
+            //         if(startFloor > endFloor) speed = -configOfElevator.SPEED_ELEVATOR;
+            //     }
+            // }
         }
 
     void Update(){
         // for(int i = 0; i<StateOfHouse.countOfEntrance; i++){
-        if(speed != 0){
-            Vector3 newPosition = StateOfHouse.elevators[entranceNumber].transform.position;
-            float startFloor = newPosition.y;
+        // if(speed != 0){
+        //     Vector3 newPosition = StateOfHouse.elevators[entranceNumber].transform.position;
+        //     float startFloor = newPosition.y;
 
-            if(speed > 0 && startFloor < this.endFloor){
-                newPosition.y += this.speed;
-                StateOfHouse.elevators[entranceNumber].transform.SetPositionAndRotation(newPosition, Quaternion.identity);
-            }
-            else{
-                if(speed < 0 && startFloor > this.endFloor){
-                    newPosition.y += this.speed;
-                    StateOfHouse.elevators[entranceNumber].transform.SetPositionAndRotation(newPosition, Quaternion.identity);
-                }
-                else speed = 0;
-            }
-        }
+        //     if(speed > 0 && startFloor < this.endFloor){
+        //         newPosition.y += this.speed;
+        //         StateOfHouse.elevators[entranceNumber].transform.SetPositionAndRotation(newPosition, Quaternion.identity);
+        //     }
+        //     else{
+        //         if(speed < 0 && startFloor > this.endFloor){
+        //             newPosition.y += this.speed;
+        //             StateOfHouse.elevators[entranceNumber].transform.SetPositionAndRotation(newPosition, Quaternion.identity);
+        //         }
+        //         else {
+        //             newPosition.y = endFloor;
+        //             StateOfHouse.elevators[entranceNumber].transform.SetPositionAndRotation(newPosition, Quaternion.identity);
+        //             speed = 0;
+        //         }
+        //     }
+        // }
         // }
     }
 }

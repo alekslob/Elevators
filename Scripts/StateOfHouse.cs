@@ -25,6 +25,7 @@ public class StateOfHouse : MonoBehaviour
     public static float HEIGHT_FLOOR = 50;
     public static float START_POSITION_Y = -200;
 
+    
     public void OnClick() {
         try
         {
@@ -54,7 +55,8 @@ public class StateOfHouse : MonoBehaviour
                 Vector3 elevatorPosition = floor.transform.position;
                 elevatorPosition.x += WIDTH_FLOOR * (i - avgX);
                 elevatorPosition.y = START_POSITION_Y;
-                
+                configOfElevator.elevatorsTasks.Add(new ElevatorsTask());
+
                 StateOfHouse.elevators.Add(Instantiate(elevator, elevatorPosition, Quaternion.identity));
 
                 for(int j = 0; j < StateOfHouse.countOfFloor; j++) {
@@ -71,6 +73,7 @@ public class StateOfHouse : MonoBehaviour
                     this.buttons[i].Add(Instantiate(button, floorButtonPosition, Quaternion.identity));
                     this.buttons[i][j].GetComponent<FloorButton>().floorNumber = j;
                     this.buttons[i][j].GetComponent<FloorButton>().entranceNumber = i;
+                    
                 }
             }
         }
